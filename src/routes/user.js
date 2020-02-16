@@ -24,4 +24,16 @@ router.get('/:idusuario', (req, res) => {
         }
     });
 });
+
+router.post('/validar-usuario', (req, res) => {
+    const { usuario, password } = req.body;
+    mysqlConnection.query('SELECT idusuario, estado, nombres, apellidos FROM usuario WHERE usuario = ? and password = ?', [usuario, password], (error, rows, fields) => {
+        if(!error) {
+            res.json(rows[0]);
+        } else {
+            console.log(error);
+        }
+    });
+});
+
 module.exports = router;
