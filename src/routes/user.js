@@ -13,6 +13,16 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/listado-noticia', (req, res) => {
+    mysqlConnection.query('SELECT * FROM noticia WHERE estado = 1', (error, rows, fields) => {
+        if(!error) {
+            res.json(rows);
+        } else {
+            console.log(error);
+        }
+    });
+});
+
 router.get('/:idusuario', (req, res) => {
     const { idusuario } = req.params;
     mysqlConnection.query('SELECT * FROM usuario WHERE idusuario = ?', [idusuario], (error, rows, fields) => {
