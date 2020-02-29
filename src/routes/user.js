@@ -57,4 +57,15 @@ router.post('/registrar-noticias', (req, res) => {
     });
 });
 
+router.post('/registrar-nuevo-interesado', (req, res)=> {
+    const { nombres, numCelular, nivel } = req.body;
+    mysqlConnection.query('INSERT INTO interesado(nombres_apellidos, num_cel, nivel_instruccion, estado) values(?,?,?,1)', [nombres, numCelular, nivel], (error) => {
+        if(!error) {
+            res.json('registrado correctamente');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
 module.exports = router;
