@@ -15,9 +15,9 @@ app.use((req, res, next) => {
   next();
 });
 
-
 //Routes
-app.use(require('./routes/user'));
+app.use('/usuario',require('./routes/user'));
+app.use('/prueba', require('./routes/prueba'));
 
 //iniciando el servidor
 app.listen(app.get('port'), () => {

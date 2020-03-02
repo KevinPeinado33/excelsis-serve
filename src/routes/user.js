@@ -13,6 +13,17 @@ router.get('/', (req, res) => {
     });
 });
 
+
+router.get('/lista-interesados', (req, res) => {
+    mysqlConnection.query('SELECT * FROM interesado', (error, rows) => {
+        if(!error) {
+            res.json(rows);
+        } else {
+            console.log(error);
+        }
+    });
+});
+
 router.get('/listado-noticia', (req, res) => {
     mysqlConnection.query('SELECT * FROM noticia WHERE estado = 1', (error, rows) => {
         if(!error) {
