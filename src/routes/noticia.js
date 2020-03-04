@@ -13,4 +13,15 @@ router.get('/listado-noticia', (req, res) => {
     });
 });
 
+router.post('/registrar-noticias', (req, res) => {
+    const { titulo, categoria, lugar } = req.body;
+    mysqlConnection.query('INSERT INTO noticia(titulo, categoria, lugar, estado) values(?, ?, ?, 1)', [titulo, categoria, lugar], (error) => {
+        if(!error) {
+            res.json('registrado correctamente');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
 module.exports = router;

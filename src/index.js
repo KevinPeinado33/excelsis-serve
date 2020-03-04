@@ -17,7 +17,8 @@ app.use((req, res, next) => {
 
 //Routes
 app.use('/usuario',require('./routes/user'));
-app.use('/prueba', require('./routes/prueba'));
+app.use('/interesado', require('./routes/interesados'));
+app.use('/noticia', require('./routes/noticia'));
 
 //iniciando el servidor
 app.listen(app.get('port'), () => {
