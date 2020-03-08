@@ -32,6 +32,17 @@ router.put('/cambiar-estado-noticia/:idnoticia', (req, res) => {
         } else {
             console.log(error);
         }
+    });
+});
+
+router.get('/obtener-noticia/:idnoticia', (req, res) => {
+    const { idnoticia } = req.params;
+    mysqlConnection.query('SELECT * FROM noticia WHERE idnoticia = ?', [idnoticia], (error, rows) => {
+        if(!error) {
+            res.json(rows[0]);
+        } else {
+            console.log(error);
+        }
     })
 });
 
