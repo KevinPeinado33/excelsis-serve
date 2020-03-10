@@ -39,7 +39,7 @@ router.post('/validar-usuario', (req, res) => {
 router.put('/editar-usuario/:idusuario', (req, res) => {
     const { idusuario } = req.params;
     const { usuario, password, nombres, apellidos } = req.body;
-    mysqlConnection.query(`UPDATE usuario SET usuario = ?, password = ?, nombres = ?, apellidos = ? WHERE = ${idusuario}`, [usuario, password, nombres, apellidos], (error, rows) => {
+    mysqlConnection.query(`UPDATE usuario SET usuario = ?, password = ?, nombres = ?, apellidos = ? WHERE idusuario = ${idusuario}`, [usuario, password, nombres, apellidos], (error, rows) => {
         if(!error) {
             res.json('Actualizado correctamente');
         } else {
