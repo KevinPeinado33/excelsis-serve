@@ -14,8 +14,8 @@ router.get('/listado-noticia', (req, res) => {
 });
 
 router.post('/registrar-noticias', (req, res) => {
-    const { titulo, categoria, lugar, picture } = req.body;
-    mysqlConnection.query('INSERT INTO noticia(titulo, categoria, lugar, url_imagen,estado) values(?, ?, ?, ?, 1)', [titulo, categoria, lugar, picture], (error) => {
+    const { titulo, categoria, lugar, picture, descripcion } = req.body;
+    mysqlConnection.query('INSERT INTO noticia(titulo, categoria, lugar, url_imagen,descripcion, estado) values(?, ?, ?, ?, ?, 1)', [titulo, categoria, lugar, picture, descripcion], (error) => {
         if(!error) {
             res.json('registrado correctamente');
         } else {
