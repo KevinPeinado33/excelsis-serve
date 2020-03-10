@@ -3,7 +3,7 @@ const router = express.Router();
 
 const mysqlConnection = require('../../db/database');
 
-router.get('/', (req, res) => {
+router.get('/lista-usuarios', (req, res) => {
     mysqlConnection.query('SELECT * FROM usuario', (error, rows) => {
         if(!error) {
             res.json(rows);
@@ -34,6 +34,29 @@ router.post('/validar-usuario', (req, res) => {
             console.log(error);
         }
     });
+});
+
+router.put('/editar-usuario/:idusuario', (req, res) => {
+    const { idusuario } = req.params;
+    const { usuario, password, nombres, apellidos } = res.body;
+    mysqlConnection.query(`UPDATE usuario SET usuario = ?, password = ?, nombres = ?, apellidos = ? WHERE = ${idusuario}`, [usuario, password, nombres, apellidos], (error, rows) => {
+        if(!error) {
+            res.json('Actualizado correctamente');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+router.post('/registrar-usuario', (req, res) => {
+    const { usuario, password, nombres, apellidos } = res.body;
+    mysqlConnection.query('INSERT INTO usuario(usuario, password, nombres, apellidos, estado) values(?,?,?,?,1)', [usuario, password, nombres, apellidos], (error) => {
+        if(!error) {
+            res.json('Registrado Correctamente');
+        } else {
+            console.log(error);
+        }
+    })
 });
 
 module.exports = router;
