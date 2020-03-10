@@ -13,7 +13,7 @@ router.get('/lista-usuarios', (req, res) => {
     });
 });
 
-router.get('/:idusuario', (req, res) => {
+router.get('buscar-usuario-by-id/:idusuario', (req, res) => {
     const { idusuario } = req.params;
     mysqlConnection.query('SELECT * FROM usuario WHERE idusuario = ?', [idusuario], (error, rows) => {
         if(!error) {
